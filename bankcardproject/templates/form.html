@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+  <h1>Application Form</h1>
+  <form action="{% url 'form_page' %}" method="POST">
+    {% csrf_token %}
+    <table>
+  <tr>
+    <td><label for="name">Name:</label></td>
+    <td><input type="text" name="name" id="name" placeholder="your name" required></td>
+  </tr>
+  <tr>
+    <td><label for="dob">DOB:</label></td>
+    <td><input type="date" name="dob" id="dob" placeholder="DOB" required></td>
+  </tr>
+  <tr>
+    <td><label for="age">Age:</label></td>
+    <td><input type="number" name="number" id="number" placeholder="Age" required></td>
+  </tr>
+  <tr>
+    <td><label for="gender">Gender:</label></td>
+    <td>Male: <input type="radio" name="gender" value="male">
+      Female: <input type="radio" name="gender" value="female">
+      Transgender: <input type="radio" name="gender" value="Transgender"></td>
+  </tr>
+  <tr>
+    <td><label for="phoneNumber">Phone Number:</label></td>
+    <td><input type="number" name="phoneNumber" id="phoneNumber" required></td>
+  </tr>
+  <tr>
+    <td><label for="email">Email:</label></td>
+    <td><input type="text" name="email" id="email" placeholder="your email" required></td>
+  </tr>
+  <tr>
+    <td><label for="address">Address:</label></td>
+    <td><textarea name="address" id="address" placeholder="Address" required></textarea></td>
+  </tr>
+
+
+  <tr>
+    <td><label for="district">District</label></td>
+    <td>
+      <label for="district" >District:</label>
+  <select id="district" onchange="populateBranchDropdown()">
+    <option value="">Select a district</option>
+
+    <option value="Ernakulam">Ernakulam</option>
+    <option value="Kannur">Kannur</option>
+    <option value="Kozhikode">Kozhikode</option>
+    <option value="Malappuram">Malappuram</option>
+    <option value="Wayanad">Wayanad</option>
+  </select>
+
+  <br>
+
+  <label for="branch">Branch:</label>
+  <select id="branch">
+    <option value="">Select a branch</option>
+  </select>
+  </tr>
+  <tr>
+    <td><label for="Account">Account Type</label></td>
+    <td>
+      <select id="account" name="account">
+        <option value="">Choose</option>
+        <option value="Savings">Savings</option>
+        <option value="Current">Current</option>
+      </select></td>
+  </tr>
+  <tr>
+    <td><label for="material">Materials Required :</label></td>
+    <td>
+      <input type="radio" id="debit" name="materials[]" value="Debit Card">
+      <label for="debit">Debit Card</label>
+      <input type="radio" id="credit" name="materials[]" value="Credit Card">
+      <label for="credit">Credit Card</label>
+      <input type="radio" id="cheque" name="materials[]" value="Chequebook">
+      <label for="debit">Cheque Book</label></td>
+  </tr>
+
+</table>
+
+    <button type="submit">Submit</button>
+    <a href="{% url 'bankcardapp:index' %}">Return to Home</a>
+  </form>
+
+  <script>
+    // Retrieve the district dropdown and branch dropdown elements
+var districtDropdown = document.getElementById("district");
+var branchDropdown = document.getElementById("branch");
+
+// Define the district options and their corresponding branches
+var districtOptions = {
+  "Ernakulam": ["Aluva", "Edapally"],
+  "Kannur": ["Thaliparamba", "Payyanur"],
+  "Kozhikode": ["Vatakara", "Kozhikode"],
+  "Malappuram": ["Ernad", "Perinthalmanna"],
+  "Wayanad": ["Sulthanbathery", "Vythiri"]
+
+
+
+
+  // Add more districts and branches as needed
+};
+
+// Function to populate the branch dropdown based on the selected district
+function populateBranchDropdown() {
+  var selectedDistrict = districtDropdown.value;
+
+  // Clear the branch dropdown options
+  branchDropdown.innerHTML = "";
+
+  if (selectedDistrict !== "") {
+    var branches = districtOptions[selectedDistrict];
+
+    // Create options for each branch
+    branches.forEach(function(branch) {
+      var option = document.createElement("option");
+      option.text = branch;
+      branchDropdown.add(option);
+    });
+  }
+}
+
+// Attach the onchange event handler to the district dropdown
+districtDropdown.addEventListener("change", populateBranchDropdown);
+
+  </script>
+
+
+
+
+</body>
+</html>

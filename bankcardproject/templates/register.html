@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="{% static 'css/form.css' %}" rel='stylesheet' type='text/css'/>
+</head>
+<body>
+    <div class="main">
+		<input type="checkbox" id="chk" aria-hidden="true">
+
+			<div class="login">
+				<form class="form" action="register" method="post">
+					{% csrf_token %}
+					<label for="chk" aria-hidden="true">Register</label>
+					<input class="input" type="text" name="username" placeholder="Enter the username" required="">
+					<input class="input" type="password" name="password" placeholder="Enter the password" required="">
+					<input class="input" type="password" name="password1" placeholder="Confirm password" required="">
+					<button>Register</button>
+				</form>
+			</div>
+	</div>
+
+</body>
+</html>
